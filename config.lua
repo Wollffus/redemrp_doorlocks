@@ -166,39 +166,8 @@ Config.DoorList = {
 		locked = false,
 		distance = 3.0
 	},
-	-- {
-	-- 	authorizedJobs = { 'police' },
-	-- 	doorid = 1614494720,
-	-- 	objCoords  = vector3(1359.12, -1297.56, 76.78),
-	-- 	textCoords  = vector3(1358.51, -1298.95,77.78),
-	-- 	objYaw = -110.0,
-	-- 	locked = true,
-	-- 	distance = 3.0
-	-- },
 
-	-- --
-	-- -- Blackwater Sheriff Office
-	-- --
-
-	{
-		textCoords = vector3(-757.27, -1269.34, 44.04),
-		authorizedJobs = { 'police' },
-		locked = false,
-		distance = 2.5,
-		doors = {
-			{
-				objYaw = 90.0,
-				doorid = 3410720590,
-				objCoords = vector3(-757.05, -1268.49, 43.06)
-			},
-
-			{
-				objYaw = 90.0,
-				doorid = 3821185084,
-				objCoords = vector3(-757.05, -1269.93, 43.06)
-			}
-		}
-	},
+-----------------------------------------------------HOUSING---------------------------------------------------------------------------------	
 	{
 		authorizedJobs = { '100' },
 		object = 3598523785,

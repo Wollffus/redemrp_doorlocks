@@ -7,52 +7,52 @@ end)
 
 RegisterServerEvent('redemrp_doorlocks:updatedoorsv')
 AddEventHandler('redemrp_doorlocks:updatedoorsv', function(source, doorID, cb)
-    local _source = tonumber(source)
-	local test1 = false
-	local test2 = false
-	local ItemData = data.getItem(_source, 'wolfkey' , {uid = Config.DoorList[doorID].authorizedJobs[1]})
+    local _source = source
+	local homes1 = false
+	local homes2 = false
+	local ItemData = data.getItem(_source, 'housekey' , {uid = Config.DoorList[doorID].authorizedJobs[1]})
     TriggerEvent('redemrp:getPlayerFromId', _source, function(user) 
 
 		local key = ItemData.ItemAmount
 		if key < 1 then
-			test1 = true
+			homes1 = true
 
 		 else
 			TriggerClientEvent('redemrp_doorlocks:changedoor', _source, doorID)
 		end
 
         if not IsAuthorized(user.getJob(), Config.DoorList[doorID]) then
-			test2 = true
+			homes2 = true
 
         else
             TriggerClientEvent('redemrp_doorlocks:changedoor', _source, doorID)
         end
 
-		if test1 and test2 then
-			TriggerClientEvent('chatMessage', source, "", {0, 0, 200}, "^1You dont have the key!^0")
+		if homes1 and homes2 then
+			TriggerClientEvent("redemrp_notification:start", _source, "You dont have the key!", 5)
 		end
 	end)
 end)
 
 RegisterServerEvent('redemrp_doorlocks:updateState')
 AddEventHandler('redemrp_doorlocks:updateState', function(doorID, state)
-	local test1 = false
-	local test2 = false
-    local _source = tonumber(source)
+	local _source = source
+	local homes1 = false
+	local homes2 = false
     TriggerEvent('redemrp:getPlayerFromId', _source, function(user)
 		if type(doorID) ~= 'number' then
 			return
 		end
-		local ItemData = data.getItem(_source, 'wolfkey' , {uid = Config.DoorList[doorID].authorizedJobs[1]})
+		local ItemData = data.getItem(_source, 'housekey' , {uid = Config.DoorList[doorID].authorizedJobs[1]})
 		local key = ItemData.ItemAmount
 		if key < 1 then
-			test1 = true
+			homes1 = true
 		end
 
         if not IsAuthorized(user.getJob(), Config.DoorList[doorID]) then
-			test2 = true
+			homes2 = true
         end
-		if test1 and test2 then
+		if homes1 and homes2 then
 			return
 		end
 
@@ -61,15 +61,16 @@ AddEventHandler('redemrp_doorlocks:updateState', function(doorID, state)
 		TriggerClientEvent('redemrp_doorlocks:setState', -1, doorID, state)
     end)
 end)
+
 RegisterServerEvent('redemrp_doorlocks:Load')
 AddEventHandler('redemrp_doorlocks:Load', function()
 local _source = source
 if DoorInfo ~= nil then
 	for _ ,v in pairs(DoorInfo) do
 
-		TriggerClientEvent('redemrp_doorlocks:setState', _source, v[1], v[2])
+			TriggerClientEvent('redemrp_doorlocks:setState', _source, v[1], v[2])
+		end
 	end
-end
 end)
 
 function IsAuthorized(jobName, doorID)

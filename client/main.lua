@@ -76,7 +76,7 @@ Citizen.CreateThread(function()
 
             if distance < maxDistance then
                 DrawText3D(doorID.textCoords.x, doorID.textCoords.y, doorID.textCoords.z, " " ,doorID.locked)
-                if IsControlJustPressed(2, 0xE8342FF2) then -- Hold ALT
+                if IsControlJustPressed(2, 0xE8342FF2) then
                     makeEntityFaceEntity(PlayerPedId(), doorID.textCoords , k )
                 end
             end
@@ -87,6 +87,7 @@ Citizen.CreateThread(function()
         end
     end
 end)
+
 function makeEntityFaceEntity( entity1, coords , k)
     local p1 = GetEntityCoords(entity1, true)
     local p2 = coords
@@ -165,7 +166,6 @@ function DrawText3D(x, y, z, text , state)
     end
 end
 
--- Set state for a door
 RegisterNetEvent('redemrp_doorlocks:setState')
 AddEventHandler('redemrp_doorlocks:setState', function(doorID, state)
     Config.DoorList[doorID].locked = state
